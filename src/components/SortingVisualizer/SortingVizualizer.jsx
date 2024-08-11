@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { SortAnimations } from '../../utils/SortingAlgorithms';
+import Modal from '@mui/material/Modal';
 import 'react-dropdown/style.css';
 
 export default function SortingVizualizer() {
@@ -7,12 +8,25 @@ export default function SortingVizualizer() {
     const [newArray, setNewArray] = useState(null);
     const [width, setWidth] = useState(0);
     const [activeAlgoName, setActiveAlgoName] = useState("N/A")
+    const [open, setOpen] = useState(false);
+    const [modalMsg, setModalMsg] = useState(null);
+
     const ref = useRef(null);
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleOpen = () => {
+        testSortingAlgorithm();
+        setOpen(true);
+    };
 
     const generateNewArray = () => {
         const curArray = [];
 
         setInitialArray(null);
+        setActiveAlgoName('N/A');
 
         for (let i = 0; i < 100; i++) {
             curArray.push(randomIntFromInterval(5, 500));
@@ -38,7 +52,6 @@ export default function SortingVizualizer() {
                     verticalBars[oneIdx].style.backgroundColor = color;
                     verticalBars[twoIdx].style.backgroundColor = color;
                 }, i * 10);
-                console.log('animations' + ' ' + oneIdx + ', ' + twoIdx);
             } else {
                 const [oneIdx, newHeight] = animations[i];
 
@@ -88,14 +101,19 @@ export default function SortingVizualizer() {
     };
 
     const testSortingAlgorithm = () => {
-        const jsSortedArr = initialArray.toSorted((a, b) => a - b);
+        if (initialArray == null) {
+            setModalMsg('ERROR: {Generate a new array.')
+        } else {
+            const jsSortedArr = initialArray.toSorted((a, b) => a - b);
 
-        if (activeAlgoName === "N/A") {
-            return console.log('No active sorting. Choose a sorting algorithm.')
-        }
+            if (activeAlgoName === "N/A") {
+                setModalMsg('ERROR: No active sorting. Choose a sorting algorithm.');
+                return;
+            }
 
-        if (arraysAreEqual(newArray, jsSortedArr)) {
-            console.log(activeAlgoName + ': PASSED')
+            if (arraysAreEqual(newArray, jsSortedArr)) {
+                setModalMsg(activeAlgoName + ': PASSED');
+            }
         }
     };
 
@@ -144,8 +162,17 @@ export default function SortingVizualizer() {
                 <button className="py-1 px-2 bg-slate-400 rounded-md shadow-lg" disabled onClick={quickSort}>Quick Sort</button>
                 <button className="py-1 px-2 bg-slate-400 rounded-md shadow-lg" disabled onClick={heapSort}>Heap Sort</button>
                 <button className="py-1 px-2 bg-slate-400 rounded-md shadow-lg" disabled onClick={bubbleSort}>Bubble Sort</button>
-                <button className="py-1 px-2 bg-[#AADBFF] rounded-md shadow-lg" onClick={testSortingAlgorithm}>Test Algorithm</button>
+                <button className="py-1 px-2 bg-[#AADBFF] rounded-md shadow-lg" onClick={handleOpen}>Test Algorithm</button>
             </div>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <div className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-auto w-auto max-w-72 bg-sky-50 rounded-lg border-2 border-slate-400 flex items-center justify-center px-8 py-5"
+                >{modalMsg}</div>
+            </Modal>
         </div >
     )
 }
