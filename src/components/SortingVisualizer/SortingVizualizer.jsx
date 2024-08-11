@@ -102,7 +102,7 @@ export default function SortingVizualizer() {
 
     const testSortingAlgorithm = () => {
         if (initialArray == null) {
-            setModalMsg('ERROR: {Generate a new array.')
+            setModalMsg('ERROR: Generate a new array.')
         } else {
             const jsSortedArr = initialArray.toSorted((a, b) => a - b);
 
