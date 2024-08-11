@@ -141,9 +141,9 @@ export default function SortingVizualizer() {
             <div className="flex flex-row gap-2 m-5 text-white font-semibold text-sm">
                 <button className="py-1 px-2 bg-[#AADBFF] rounded-md shadow-lg" onClick={generateNewArray}>Generate New Array</button>
                 <button className="py-1 px-2 bg-[#AADBFF] rounded-md shadow-lg" onClick={mergeSort}>Merge Sort</button>
-                <button className="py-1 px-2 bg-[#AADBFF] rounded-md shadow-lg" onClick={quickSort}>Quick Sort</button>
-                <button className="py-1 px-2 bg-[#AADBFF] rounded-md shadow-lg" onClick={heapSort}>Heap Sort</button>
-                <button className="py-1 px-2 bg-[#AADBFF] rounded-md shadow-lg" onClick={bubbleSort}>Bubble Sort</button>
+                <button className="py-1 px-2 bg-slate-400 rounded-md shadow-lg" disabled onClick={quickSort}>Quick Sort</button>
+                <button className="py-1 px-2 bg-slate-400 rounded-md shadow-lg" disabled onClick={heapSort}>Heap Sort</button>
+                <button className="py-1 px-2 bg-slate-400 rounded-md shadow-lg" disabled onClick={bubbleSort}>Bubble Sort</button>
                 <button className="py-1 px-2 bg-[#AADBFF] rounded-md shadow-lg" onClick={testSortingAlgorithm}>Test Algorithm</button>
             </div>
         </div >
