@@ -13,10 +13,6 @@ export function SortAnimations(algoName, arr) {
       mergeSortAnimationsHelper(arr, 0, arr.length - 1, tempArray, animations);
       return { sortedArray: mergeSort(arr), animations: animations };
     case "Quick Sort":
-    // return {
-    //   sortedArray: quickSort(arr, animations),
-    //   animations: animations,
-    // };
     case "Heap Sort":
     case "Bubble Sort":
     default:
@@ -98,37 +94,37 @@ function doMerge(arr, startIdx, middleIdx, endIdx, tempArray, animations) {
 }
 
 // Quick Sort Functions
-function quickSort(arr, animations) {
-  // terminate execution and return array if empty
-  // or containing one elemrnt
-  if (arr.length <= 1) return arr;
+// function quickSort(arr, animations) {
+//   // terminate execution and return array if empty
+//   // or containing one elemrnt
+//   if (arr.length <= 1) return arr;
 
-  // set the pivot to the last item on the list
-  const pivot = arr[arr.length - 1];
+//   // set the pivot to the last item on the list
+//   const pivot = arr[arr.length - 1];
 
-  // create temporary contaners
-  const leftArr = [];
-  const rightArr = [];
+//   // create temporary contaners
+//   const leftArr = [];
+//   const rightArr = [];
 
-  const tempArr = arr.slice(0, arr.length - 1);
+//   const tempArr = arr.slice(0, arr.length - 1);
 
-  // loop through the array to put the pivot in its sorted position
-  for (let i = 0; i < tempArr.length; i++) {
-    animations.push([i, i]);
-    if (tempArr[i] > pivot) {
-      rightArr.push(tempArr[i]);
-      animations.push([i, rightArr.findIndex((x) => x === tempArr[i])]);
-    } else {
-      leftArr.push(tempArr[i]);
-      animations.push([i, leftArr.findIndex((x) => x === tempArr[i])]);
-    }
-  }
+//   // loop through the array to put the pivot in its sorted position
+//   for (let i = 0; i < tempArr.length; i++) {
+//     animations.push([i, i]);
+//     if (tempArr[i] > pivot) {
+//       rightArr.push(tempArr[i]);
+//       animations.push([i, rightArr.findIndex((x) => x === tempArr[i])]);
+//     } else {
+//       leftArr.push(tempArr[i]);
+//       animations.push([i, leftArr.findIndex((x) => x === tempArr[i])]);
+//     }
+//   }
 
-  // repeat same processes above on both partition
-  // until every item is at its sorted position
-  return [
-    ...quickSort(leftArr, animations),
-    pivot,
-    ...quickSort(rightArr, animations),
-  ];
-}
+//   // repeat same processes above on both partition
+//   // until every item is at its sorted position
+//   return [
+//     ...quickSort(leftArr, animations),
+//     pivot,
+//     ...quickSort(rightArr, animations),
+//   ];
+// }

@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { SortAnimations } from '../../utils/SortingAlgorithms';
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import FadeIn from 'react-fade-in';
 
 export default function SortingVizualizer() {
     const [initialArray, setInitialArray] = useState(null);
@@ -54,7 +52,7 @@ export default function SortingVizualizer() {
 
     const quickSort = () => {
         const tempArr = initialArray.slice();
-        const { sortedArray, animations } = SortAnimations('Quick Sort', tempArr);
+        const { animations } = SortAnimations('Quick Sort', tempArr);
 
         // setInitialArray(sortedArray);
 
@@ -70,7 +68,6 @@ export default function SortingVizualizer() {
                     verticalBars[oneIdx].style.backgroundColor = color;
                     verticalBars[twoIdx].style.backgroundColor = color;
                 }, i * 10);
-                console.log('animations' + ' ' + oneIdx + ', ' + twoIdx);
             } else {
                 const [oneIdx, newHeight] = animations[i];
 
