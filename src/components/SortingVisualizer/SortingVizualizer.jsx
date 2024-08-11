@@ -139,7 +139,7 @@ export default function SortingVizualizer() {
             ) :
                 <div className='place-content-end w-5/6 min-w-[575px] max-w-3xl h-[535px] rounded-lg border-4 border-[#AADBFF] px-5 py-3 shadow-lg' ref={ref}>
 
-                    <div className='flex flex-row h-fit place-items-end'>
+                    <div className='flex flex-row h-[500px] place-items-end'>
                         {
                             (initialArray.map((int, idx) =>
                                 <div key={idx}
