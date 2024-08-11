@@ -1,10 +1,10 @@
 import "./App.css";
-import SortingVizualizer from "./components/SortingVisualizer/SortingVizualizer";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <div className="App">
-      <SortingVizualizer />
+      <Home />
     </div>
   );
 }
