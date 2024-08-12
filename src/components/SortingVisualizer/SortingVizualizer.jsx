@@ -39,6 +39,7 @@ export default function SortingVizualizer() {
         const curArray = [];
 
         setInitialArray(null);
+        setNewArray(null);
         setActiveAlgoName('N/A');
         setIsSortDisabled(false);
         setIsTestDisabled(false);
