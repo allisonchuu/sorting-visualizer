@@ -13,6 +13,11 @@ export function SortAnimations(algoName, arr) {
       mergeSortAnimationsHelper(arr, 0, arr.length - 1, tempArray, animations);
       return { sortedArray: mergeSort(arr), animations: animations };
     case "Quick Sort":
+      // return {
+      //   sortedArray: quickSort(arr, animations, tempArray),
+      //   animations: animations,
+      // };
+      break;
     case "Heap Sort":
     case "Bubble Sort":
     default:
@@ -33,7 +38,7 @@ const merge = (leftArr, rightArr) => {
   return result.concat(leftArr.length ? leftArr : rightArr);
 };
 
-function mergeSort(arr, animations) {
+function mergeSort(arr) {
   if (arr === null) {
     return;
   }
@@ -43,10 +48,10 @@ function mergeSort(arr, animations) {
   }
 
   const midIndex = Math.floor(arr.length / 2);
-  const leftArr = mergeSort(arr.slice(0, midIndex), animations);
-  const rightArr = mergeSort(arr.slice(midIndex), animations);
+  const leftArr = mergeSort(arr.slice(0, midIndex));
+  const rightArr = mergeSort(arr.slice(midIndex));
 
-  return merge(mergeSort(leftArr, animations), mergeSort(rightArr, animations));
+  return merge(mergeSort(leftArr), mergeSort(rightArr));
 }
 
 // Merge Sort Animation Functions
@@ -94,37 +99,132 @@ function doMerge(arr, startIdx, middleIdx, endIdx, tempArray, animations) {
 }
 
 // Quick Sort Functions
-// function quickSort(arr, animations) {
-//   // terminate execution and return array if empty
-//   // or containing one elemrnt
+// function quickSort(arr, animations, tempArray) {
 //   if (arr.length <= 1) return arr;
 
-//   // set the pivot to the last item on the list
+//   //let pivotIdx = tempArray.findIndex((value) => value === arr[arr.length - 1]);
+//   let animationTempArray = tempArray.slice();
+
 //   const pivot = arr[arr.length - 1];
 
-//   // create temporary contaners
+//   console.log("pivotindex", arr.length - 1);
+//   console.log("pivotvalue", pivot);
+
+//   animations.push([arr.length - 1, arr.length - 1]);
+//   animations.push([arr.length - 1, arr.length - 1]);
+//   animations.push([arr.length - 1, pivot]);
+
 //   const leftArr = [];
 //   const rightArr = [];
 
 //   const tempArr = arr.slice(0, arr.length - 1);
 
-//   // loop through the array to put the pivot in its sorted position
+//   let leftIdx = tempArray.findIndex((value) => value === arr[0]);
+//   let j = -1;
+
 //   for (let i = 0; i < tempArr.length; i++) {
-//     animations.push([i, i]);
+//     let rightIdx = tempArray.findIndex((value) => value === arr[i]);
+
+//     console.log(j);
 //     if (tempArr[i] > pivot) {
+//       animations.push([rightIdx, rightIdx]);
+//       animations.push([rightIdx, rightIdx]);
+//       animations.push([
+//         rightIdx,
+//         rightIdx,
+//         animationTempArray[rightIdx],
+//         animationTempArray[rightIdx],
+//       ]);
 //       rightArr.push(tempArr[i]);
-//       animations.push([i, rightArr.findIndex((x) => x === tempArr[i])]);
 //     } else {
+//       j++;
+//       if (i === 0) {
+//         animations.push([rightIdx, rightIdx]);
+//         animations.push([rightIdx, rightIdx]);
+//         animations.push([
+//           rightIdx,
+//           rightIdx,
+//           animationTempArray[rightIdx],
+//           animationTempArray[rightIdx],
+//         ]);
+//       } else {
+//         leftIdx = tempArray.findIndex((value) => value === arr[j]);
+//         let tempValue = animationTempArray[rightIdx];
+//         animationTempArray[rightIdx] = animationTempArray[leftIdx];
+//         animationTempArray[leftIdx] = tempValue;
+
+//         animations.push([leftIdx, rightIdx]);
+//         animations.push([leftIdx, rightIdx]);
+//         animations.push([
+//           leftIdx,
+//           rightIdx,
+//           animationTempArray[rightIdx],
+//           animationTempArray[leftIdx],
+//         ]);
+//       }
 //       leftArr.push(tempArr[i]);
-//       animations.push([i, leftArr.findIndex((x) => x === tempArr[i])]);
 //     }
 //   }
 
-//   // repeat same processes above on both partition
-//   // until every item is at its sorted position
+//   animations.push([arr.length - 1, arr.length - 1]);
+//   animations.push([arr.length - 1, arr.length - 1]);
+//   animations.push([arr.length - 1, pivot]);
+
 //   return [
-//     ...quickSort(leftArr, animations),
+//     ...quickSort(leftArr, animations, tempArray),
 //     pivot,
-//     ...quickSort(rightArr, animations),
+//     ...quickSort(rightArr, animations, tempArray),
+//   ];
+// }
+
+// function quickSortAnimations(arr, animations, tempArray) {
+//   if (arr.length <= 1) return arr;
+
+//   const pivotIdx = tempArray.findIndex(
+//     (value) => value === arr[arr.length - 1]
+//   );
+//   const pivot = tempArray[pivotIdx];
+
+//   const leftArr = [];
+//   const rightArr = [];
+
+//   let leftIdx = tempArray.findIndex((value) => value === arr[0]);
+//   let rightIdx = tempArray.findIndex((value) => value === arr[0]);
+
+//   animations.push([pivotIdx, pivotIdx, pivotIdx]);
+//   animations.push([pivotIdx, pivotIdx, pivotIdx]);
+//   animations.push([pivotIdx, pivot, pivotIdx]);
+
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] > pivot) {
+//       animations.push([rightIdx, rightIdx, pivotIdx]);
+//       animations.push([rightIdx, rightIdx, pivotIdx]);
+//       animations.push([rightIdx, tempArray[rightIdx], pivotIdx]);
+//       rightIdx++;
+//       rightArr.push(arr[i]);
+//     } else {
+//       if (i - 1 < 0) {
+//         animations.push([rightIdx, rightIdx, pivotIdx]);
+//         animations.push([rightIdx, rightIdx, pivotIdx]);
+//         animations.push([rightIdx, tempArray[rightIdx], pivotIdx]);
+//         rightIdx++;
+//       } else {
+//         animations.push([leftIdx, rightIdx, pivotIdx]);
+//         animations.push([leftIdx, rightIdx, pivotIdx]);
+//         animations.push([leftIdx, tempArray[rightIdx], pivotIdx]);
+//         leftIdx++;
+//         rightIdx++;
+//         leftArr.push(arr[i]);
+//       }
+//     }
+//     animations.push([pivotIdx, pivotIdx, pivotIdx]);
+//     animations.push([pivotIdx, pivotIdx, pivotIdx]);
+//     animations.push([pivotIdx, pivot, pivotIdx]);
+//   }
+
+//   return [
+//     ...quickSortAnimations(leftArr, animations, tempArray),
+//     pivot,
+//     ...quickSortAnimations(rightArr, animations, tempArray),
 //   ];
 // }
