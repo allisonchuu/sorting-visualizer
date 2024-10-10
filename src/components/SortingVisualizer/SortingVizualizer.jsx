@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import DisplayArray from '../DisplayArray';
 import { SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/24/solid'
+import FullLogo from '../../assets/sortingvisualizerlogo.png'
 
 export default function SortingVizualizer() {
     // Sort Array Values
@@ -235,11 +236,11 @@ export default function SortingVizualizer() {
 
     return (
         <div className='flex place-items-center min-h-screen flex-col p-8 sm:p-16'>
-            <h1 className='font-bold text-lg pb-2'>Sorting Visualizer</h1>
             <div className='flex flex-col w-full max-w-[803px] gap-2'>
                 <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full md:gap-2'>
                     <div className='col-span-1 w-full rounded-lg border-4 border-[#AADBFF] shadow-lg mb-2 md:mb-0 text-xs'>
                         <div className="flex flex-col gap-2 m-5 text-white font-semibold">
+                            <img src={FullLogo} alt="Sorting Visualizer Logo" className='w-full pb-1 px-2 md:px-0' />
                             <FormControl size="small" className='shadow-md'>
                                 <InputLabel id="sort-algo-label">Sorting Algorithm</InputLabel>
                                 <Select
